@@ -1,3 +1,4 @@
+
 #include<iostream>
 using namespace std;
 
@@ -11,25 +12,6 @@ class Node{
     }
 };
 
-Node *takeInput1(){
-    int data;
-    cin>>data;
-   // Node *newNode=new Node(data);
-    Node *head=NULL,*tail=NULL;
-    while(data!=-1){
-        Node *newNode=new Node(data);
-        if(head==NULL){
-            head=newNode;
-            tail=newNode;
-        }
-        else if(head!=NULL){
-            tail->next=newNode;
-            tail=newNode;
-        }
-        cin>>data;
-    }
-    return head;
-}
 
 Node *takeInput(){
     int data;
@@ -130,6 +112,43 @@ int length_iteratively(Node *head){
     return c;
 }
 
+void printithNode(Node *head,int pos){
+    if(head==NULL){
+        return ;
+    }
+    Node *tmp=head;int i=0;
+    while(tmp!=NULL && i<pos){
+        tmp=tmp->next;i++;
+    }
+    cout<<tmp->data<<endl;
+    
+}
+
+Node *deleteatithpos_recursively(Node *head,int pos){
+    if(head==NULL){
+        return NULL;
+    }
+    if(pos==0){
+        Node *tmp=head;
+        head=tmp->next;
+        free(tmp);
+        return head;
+    }
+    Node *x=deleteatithpos_recursively(head->next,pos-1);
+    head->next=x;
+    return head;
+}
+
+int search(Node *head,int d){
+    Node *temp=head;int i=0;
+    if(head==NULL){
+        return -1;
+    }
+    while(temp!=NULL && temp->data!=d){
+        i++;temp=temp->next;
+    }
+    return i;
+}
 int main(){
     Node *head=takeInput();
     print(head);
@@ -145,4 +164,9 @@ int main(){
     cout<<endl;
     cout<<length_iteratively(h1)<<endl;
     cout<<length(h1)<<endl;
+    printithNode(head,2);
+    head=deleteatithpos_recursively(head,2);
+    print_recursively(head);
+    cout<<search(head,3);
+    
 }
