@@ -149,6 +149,20 @@ int search(Node *head,int d){
     }
     return i;
 }
+
+int search_recursively(Node *head,int d){
+    if(head==NULL){
+        return -1;
+    }
+    if(head->data==d){
+        return 0;
+    }
+    int count=search_recursively(head->next,d);
+    if(count==-1){
+        return -1;
+    }
+    return count+1;
+}
 int main(){
     Node *head=takeInput();
     print(head);
@@ -168,5 +182,6 @@ int main(){
     head=deleteatithpos_recursively(head,2);
     print_recursively(head);
     cout<<search(head,3);
+    cout<<search_recursively(head,3)<<endl;
     
 }
