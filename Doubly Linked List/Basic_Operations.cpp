@@ -89,6 +89,21 @@ DNode *insertatithpos(DNode *head,int data,int pos){
          
     }
 }*/
+void deleteNode(DNode *head,DNode *del_node){
+    if(head==NULL || del_node == NULL){
+        return;
+    }
+    if(head==del_node){
+        head=head->next;
+    }
+    if (del_node->next != NULL){
+           del_node->next->prev = del_node->prev;
+    }
+    if (del_node->prev != NULL){
+      del_node->prev->next = del_node->next;
+    }
+    free(del_node);
+}
 int main(){
     /*DNode *h1=new DNode(1);
     DNode *h2=new DNode(3);
@@ -107,6 +122,8 @@ int main(){
     h1->prev=NULL;*/
     DNode *head=takeinput();
     print_from_front(head);
-    DNode *last=movetolast(head);
-    print_from_end(last);
+    //DNode *last=movetolast(head);
+    //print_from_end(last);
+    deleteNode(head,head->next->next->next);
+    print_from_front(head);
 }
