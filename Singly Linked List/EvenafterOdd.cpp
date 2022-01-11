@@ -1,6 +1,6 @@
 #include<iostream>
 using namespace std;
-
+// even after odd
 class Node{
   public:
     int data;
