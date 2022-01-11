@@ -81,7 +81,7 @@ Node *evenafterodd(Node *head){
         oddtail->next=evenhead;
     }
     if(evenhead!=NULL){
-        evenhead->next=NULL;
+        eventail->next=NULL;
     }
     
     return oddhead;
