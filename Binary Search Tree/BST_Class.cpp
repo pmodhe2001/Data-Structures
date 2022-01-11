@@ -60,8 +60,63 @@ class BST{
        void insert(int data){
            root=insert(r,data);
        }
+    private:
+    BinaryTreeNode<int> *remove(int data, BinaryTreeNode<int> *node)
+    {
+        if (node == nullptr)
+        {
+            return nullptr;
+        }
+        if (node->data > data)
+        {
+            node->left = remove(data, node->left);
+            return node;
+        }
+        else if (node->data < data)
+        {
+            node->right = remove(data, node->right);
+            return node;
+        }
+        else
+        {
+            if (node->left == nullptr && node->right == nullptr)
+            {
+                delete node;
+                return nullptr;
+            }
+            else if (node->left == nullptr)
+            {
+                BinaryTreeNode<int> *temp = node->right;
+                node->right = nullptr;
+                delete node;
+                return temp;
+            }
+            else if (node->right == nullptr)
+            {
+                BinaryTreeNode<int> *temp = node->left;
+                node->left = nullptr;
+                delete node;
+                return temp;
+            }
+            else
+            {
+                BinaryTreeNode<int> *minNode = node->right;
+                while (minNode->left != nullptr)
+                {
+                    minNode = minNode->left;
+                }
+                int minData = minNode->data;
+                node->data = minData;
+                node->right = remove(minData, node->right);
+                return node;
+            }
+        }
+    }
+
+public:
+    void remove(int data)
+    {
+        root = remove(data, root);
+    }
 };
 
-int main(){
-    
-}
