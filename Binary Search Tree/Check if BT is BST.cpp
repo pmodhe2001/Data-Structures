@@ -1,3 +1,7 @@
+/*
+Given a binary tree with N number of nodes, check if that input tree is BST (Binary Search Tree). If yes, return true, return false otherwise.
+Note: Duplicate elements should be kept in the right subtree.
+*/
 #include<bits/stdc++.h>
 bool helper(BinaryTreeNode<int> *root, int min, int max){
     
