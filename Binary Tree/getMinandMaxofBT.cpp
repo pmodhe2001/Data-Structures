@@ -1,4 +1,9 @@
-
+/*
+Min and Max of Binary Tree
+Send Feedback
+For a given a Binary Tree of type integer, find and return the minimum and the maximum data values.
+Return the output as an object of Pair class, which is already created.
+*/
 #include <climits> 
 pair<int, int> getMinAndMax(BinaryTreeNode<int> *root) {
     pair<int, int> ret = make_pair(INT_MAX, INT_MIN);
