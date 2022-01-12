@@ -1,8 +1,5 @@
 /*
-Given a binary tree and an integer S, print all the pair of nodes whose sum equals S.
-Note:
-1. Assume the given binary tree contains all unique elements.
-2. In a pair, print the smaller element first. Order of different pairs doesn't matter.
+Given a binary search tree and an integer S, find pair of nodes in the BST which sum to S. You can use extra space of the order of O(log n).
 */
 
 // Approach 1 : Sorting Based
