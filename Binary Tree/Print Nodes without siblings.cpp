@@ -1,3 +1,7 @@
+/*
+Nodes without sibling
+For a given Binary Tree of type integer, print all the nodes without any siblings.
+*/
 void printNodesWithoutSibling(BinaryTreeNode<int> *root) {
     
     if(root == NULL){
