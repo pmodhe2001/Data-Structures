@@ -2,20 +2,18 @@
 using namespace std;
 
 int countZeros(int n) {
-    if(n==0)
-    {
-        return 0;
+    if(n<=9){
+        if(n==0){
+            return 1;
+        }else{
+            return 0;
+        }
     }
-
-    int last_digit=n%10;
-    int ans=countZeros(n/10);
-    if(last_digit==0)
-    {
-        return ans+1;
-    }else
-    {
-        return ans;
+    int last=n%10;int count=0;
+    if(last==0){
+        count=count+1;
     }
+    return count+countZeros(n/10);
 }
 
 int main() {
