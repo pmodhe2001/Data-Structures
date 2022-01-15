@@ -9,14 +9,14 @@ int getPairsWithDifferenceK(int *arr, int n, int k) {
 	unordered_map<int, int>mp;
     
     for(int i = 0;i < n; i++){
-		int c = arr[i] + k;
+	int c = arr[i] + k;
         ans += mp[c];
         if(k != 0){
             int c = arr[i] - k;
             ans += m[c];
         }
         m[arr[i]]++;
-	}
+    }
 	return ans;
 }
 
