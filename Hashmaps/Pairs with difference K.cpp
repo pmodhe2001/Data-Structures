@@ -13,9 +13,9 @@ int getPairsWithDifferenceK(int *arr, int n, int k) {
         ans += mp[c];
         if(k != 0){
             int c = arr[i] - k;
-            ans += m[c];
+            ans += mp[c];
         }
-        m[arr[i]]++;
+        mp[arr[i]]++;
     }
 	return ans;
 }
