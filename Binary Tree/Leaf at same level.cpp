@@ -1,3 +1,4 @@
+//https://practice.geeksforgeeks.org/problems/leaf-at-same-level/1#
 int height(Node *root,bool &res){
         if(root==NULL)return 0;
         int left=height(root->left,res);
