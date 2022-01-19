@@ -5,11 +5,8 @@ void print_DFS(int** edges, int n, int sv, bool* visited){
   cout << sv << endl;
   visited[sv] = true;
   for(int i=0; i<n; i++){
-    if(i==sv){
-      continue;
-    }
-    if(edges[sv][i]==1){
-      if(visited[i]){
+    if(i==sv ^ edges[sv][i]==1){
+      if(visited[i]==true){
         continue;
       }
       print_DFS(edges, n, i, visited);
