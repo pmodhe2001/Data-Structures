@@ -21,9 +21,6 @@ int binary_search(vector<int> &in,int key,int start,int end){
         }
     }
 }
-    
-    
-
 vector<int> findPreSuc(binaryTreeNode *root, int key)
 {
     vector<int> in;
@@ -32,6 +29,13 @@ vector<int> findPreSuc(binaryTreeNode *root, int key)
     traversal(root,in);
     int index=binary_search(in,key,0,in.size()-1);
     int pre=index-1;int succ=index+1;
+    if(index==0 && index==in.size()-1){
+        succ=-1;
+        pre=-1;
+        res.push_back(pre);
+        res.push_back(succ);
+        return res;
+    }
     if(index==0){
         pre=-1;
         succ=in[index+1];
@@ -39,14 +43,13 @@ vector<int> findPreSuc(binaryTreeNode *root, int key)
     res.push_back(succ);
         return res;
     }
-    if(index==in.size()){
+    if(index==in.size()-1){
         succ=-1;
         pre=in[index-1];
          res.push_back(pre);
     res.push_back(succ);  
         return res;
-    }
- 
+    }   
     res.push_back(in[pre]);
     res.push_back(in[succ]);
     return res;
