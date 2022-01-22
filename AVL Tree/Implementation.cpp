@@ -60,6 +60,43 @@ int BalanceFactor(AvlNode *node){
     return height(node->left)-height(node->right);
 }
 
+AvlNode *insertNode(AvlNode* root,int key){
+    if(!root)return newNode(key);
+    
+    if(key<root->data){
+        AvlNode->left=insertNode(root->left,key);
+    }
+    else if(key>root->data){
+        AvlNode->right=insertNode(root->right,key);
+    }
+    else{
+        return AvlNode;
+    }
+    root->height=1+max(height(root->left),height(root->right));
+    int balance=BalanceFactor(root);
+    
+    if(balance>1 && key<root->left->data){   // Right Rotation Case
+        return rightRotation(root);
+    }
+    
+    if(balance<-1 && key>root->right->data){
+        return leftRotation(root);          // Left Rotation Case
+    }
+    
+    if(balance>1 && key>root->left->data){
+        root->left=leftRotation(root);       // Left Right Rotation
+        return rightRotation(root);
+    }
+    
+    if(balance<-1 && key<root->right->data){
+        root->right=rightRotation(root);     // Right Left Rotation
+        return leftRotation(root);
+    }
+    
+    return root;
+    
+}
+
 int main()
 {
     
