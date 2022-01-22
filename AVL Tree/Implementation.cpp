@@ -27,6 +27,39 @@ AvlNode *newNode(int data){
     return node;
 }
 
+AvlNode *rightRotation(AvlNode *y){
+    AvlNode *x=y->left;
+    AvlNode *temp_null=x->right;
+    
+    // Performing rightRotation
+    x->right=y;
+    y->left=temp_null;
+    //Updating height
+    y->height=max(height(y->left),height(y->right))+1;
+    x->height=max(height(x->left),height(x->right))+1;
+    
+    return x;
+}
+
+AvlNode *leftRotation(AvlNode *x){
+    AvlNode *y=x->right;
+    AvlNode *temp_null=y->left;
+    
+    //Performing leftRotation
+    y->left=x;
+    x->right=temp_null;
+    //Updating height
+    y->height=max(height(y->left),height(y->right))+1;
+    x->height=max(height(x->left),height(x->right))+1;
+    
+    return y;
+}
+
+int BalanceFactor(AvlNode *node){
+    if(!root)return 0;
+    return height(node->left)-height(node->right);
+}
+
 int main()
 {
     
