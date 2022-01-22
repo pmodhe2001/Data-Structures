@@ -56,7 +56,7 @@ AvlNode *leftRotation(AvlNode *x){
 }
 
 int BalanceFactor(AvlNode *node){
-    if(!root)return 0;
+    if(!node)return 0;
     return height(node->left)-height(node->right);
 }
 
@@ -64,13 +64,13 @@ AvlNode *insertNode(AvlNode* root,int key){
     if(!root)return newNode(key);
     
     if(key<root->data){
-        AvlNode->left=insertNode(root->left,key);
+        root->left=insertNode(root->left,key);
     }
     else if(key>root->data){
-        AvlNode->right=insertNode(root->right,key);
+        root->right=insertNode(root->right,key);
     }
     else{
-        return AvlNode;
+        return root;
     }
     root->height=1+max(height(root->left),height(root->right));
     int balance=BalanceFactor(root);
@@ -97,7 +97,36 @@ AvlNode *insertNode(AvlNode* root,int key){
     
 }
 
+AvlNode *minDataNode(AvlNode *root){
+    if(!root)return root;
+    
+    AvlNode* temp=root;
+    while(temp->left!=NULL){
+        temp=temp->left;
+    }
+    return temp;
+}
+
+void traversal(AvlNode *root){
+    if(root!=NULL){
+        return;
+    }
+    traversal(root->left);
+    cout<<root->data<<" ";
+    traversal(root->right);
+    
+}
+
 int main()
 {
-    
+    AvlNode *root=NULL;
+    root=insertNode(root,10);
+    root=insertNode(root,90);
+    root=insertNode(root,50);
+    root=insertNode(root,70);
+    root=insertNode(root,28);
+    root=insertNode(root,19);
+    root=insertNode(root,65);
+    root=insertNode(root,57);
+    traversal(root);
 }
