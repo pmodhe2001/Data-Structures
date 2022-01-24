@@ -24,9 +24,6 @@ Node * removeDuplicates( Node *head)
     }
 
 /*Approach 2 Using Unordered Set :
-Giving wrong answer of 1 test case : 
-1
-23
 */
 Node * removeDuplicates( Node *head) 
     {
