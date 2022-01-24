@@ -30,7 +30,7 @@ Giving wrong answer of 1 test case :
 */
 Node * removeDuplicates( Node *head) 
     {
-       if(head==NULL || head->next==NULL){
+       if(head==NULL){
            return NULL;
        }
        
@@ -50,3 +50,30 @@ Node * removeDuplicates( Node *head)
        return head;
     }
 // Approach 3 Using 2 loops
+Node * removeDuplicates( Node *head) 
+    {
+       if(head==NULL || head->next==NULL){
+           return NULL;
+       }
+       
+       
+       Node *f=head;
+       Node *s=head;
+       
+       while(f!=NULL){
+           s=f->next;
+           Node *prev=f;
+           while(s!=NULL){
+               if(f->data==s->data){
+                  f->next=s->next;
+                  s=prev->next;
+              }
+              else{
+                  prev=s;
+                  s=s->next;
+              }
+           }
+           f=f->next;
+       }
+       return head;
+    }
