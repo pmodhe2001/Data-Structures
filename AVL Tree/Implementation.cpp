@@ -84,12 +84,12 @@ AvlNode *insertNode(AvlNode* root,int key){
     }
     
     if(balance>1 && key>root->left->data){
-        root->left=leftRotation(root);       // Left Right Rotation
+        root->left=leftRotation(root->left);       // Left Right Rotation
         return rightRotation(root);
     }
     
     if(balance<-1 && key<root->right->data){
-        root->right=rightRotation(root);     // Right Left Rotation
+        root->right=rightRotation(root->right);     // Right Left Rotation
         return leftRotation(root);
     }
     
@@ -108,7 +108,7 @@ AvlNode *minDataNode(AvlNode *root){
 }
 
 void traversal(AvlNode *root){
-    if(root!=NULL){
+    if(root==NULL){
         return;
     }
     traversal(root->left);
