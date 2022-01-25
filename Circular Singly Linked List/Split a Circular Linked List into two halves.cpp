@@ -5,7 +5,7 @@ void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
     Node *slow=head;Node *fast=head;
     
-    while(fast!=NULL && fast->next!=NULL){
+    while(fast->next!=head && fast->next->next!=head){
         slow=slow->next;
         fast=fast->next->next;
     }
