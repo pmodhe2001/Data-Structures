@@ -19,18 +19,16 @@ void deleteNode(struct Node **head, int key)
 /* Function to reverse the linked list */
  void reverse(struct Node** head_ref)
 {
-    /*if(!*head_ref)return;
-    Node *curr=*head_ref;
-    Node *agla=curr->next;
-    Node *prev=NULL;
-    
-    while(curr->next!=*head_ref){
-        agla=prev->next;
-        prev->next=curr;
-        prev=curr;
-        curr=agla;
-    }
-    agla->next=prev;
-    *head_ref=curr;
-    */
+   Node *curr=*head_ref;
+   Node *temp;
+   Node *ahead=curr->next;
+   Node **initial_head=head_ref;
+   while(ahead!=*initial_head){
+       temp=ahead->next;
+       ahead->next=curr;
+       curr=ahead;
+       ahead=temp;
+   }
+   ahead->next=curr;
+   *head_ref=curr;
 }
