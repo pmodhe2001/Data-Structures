@@ -1,3 +1,9 @@
+/*
+Normal Trie Implementation
+1. Insert Word
+2. Search Word
+3. Remove Word
+*/
 #include <bits/stdc++.h>
 using namespace std;
 
