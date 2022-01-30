@@ -1,4 +1,3 @@
-
 #include<iostream>
 using namespace std;
 
@@ -8,21 +7,23 @@ class Node{
     Node *next;
     Node(int data){
         this->data=data;
-        this->next=NULL;
+        Node *next=NULL;
     }
 };
 
-
-Node *takeInput(){
+/* Iterative Functions */
+Node *takeInput(){ // This is basically Insert at End
+    Node *head=NULL;
+    Node *tail=NULL;
     int data;
     cin>>data;
-    Node *head=NULL,*tail=NULL;
     while(data!=-1){
-        Node *newNode=new Node(data);
         if(head==NULL){
+            Node *newNode=new Node(data);
             head=newNode;
             tail=newNode;
         }else{
+            Node *newNode=new Node(data);
             tail->next=newNode;
             tail=newNode;
         }
@@ -31,157 +32,282 @@ Node *takeInput(){
     return head;
 }
 
-Node *takeInput_recursively(Node *head,int data,int pos){
+void print(Node *head){
+    Node *tmp=head;
+    while(tmp){
+        cout<<tmp->data<<" ";
+        tmp=tmp->next;
+    }
+    cout<<endl;
+}
+
+Node* insertAtBeginning(Node *&head){
+    int data;
+    cin>>data;
+    while(data!=-1){
+        if(head==NULL){
+            Node *newNode=new Node(data);
+            head=newNode;
+        }
+        else{
+           Node *newNode=new Node(data);
+           newNode->next=head;
+           head=newNode;
+        }
+        cin>>data;
+    }
+    return head;
+}
+
+Node *insertAtithPos(Node *&head,int pos,int data){
+    if(head==NULL && pos==0){
+        Node *newNode=new Node(data);
+        head=newNode;
+        return head;
+    }
+    if(head==NULL && pos!=0){
+        cout<<"Given Singly Linked List is Empty & position is non zero"<<endl;
+        return NULL;
+    }
+    if(head!=NULL){
+        Node *newNode=new Node(data);
+        Node *tempHead=head;
+        for(int i=0;i<pos-1;i++){
+            tempHead=tempHead->next;
+        }
+        newNode->next=tempHead->next;
+        tempHead->next=newNode;
+    }
+    return  head;
+}
+
+void del_at_Beginning(Node *&head){
+    if(head==NULL)return;
+    Node *tmp_del=head;
+    head=head->next;
+    free(tmp_del);
+}
+
+void del_at_end(Node *&head){
+    if(head==NULL)return;
+    Node *tmp=head;
+    while(tmp->next->next!=NULL){
+        tmp=tmp->next;
+    }
+    Node *temp_del=tmp->next;
+    tmp->next=NULL;
+    free(temp_del);
+}
+
+void delAtithPos(Node *&head,int pos){
+    if(head==NULL){
+        return;
+    }
+    if(head!=NULL && pos==0){
+        Node *tmp_del=head;
+        head=head->next;
+        free(tmp_del);
+        return;
+    }
+    if(head!=NULL){
+        Node *temp_move=head;
+        for(int i=0;i<pos-1;i++){
+            temp_move=temp_move->next;
+        }
+        Node *temp_del=temp_move->next;
+        temp_move->next=temp_move->next->next;
+    }
+}
+
+int length(Node *head){
+    Node *temp=head;
+    int count=0;
+    while(temp!=NULL){
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+
+int search(Node *head,int target){
+    if(head==NULL)return -1;
+    Node *temp=head;
+    int count=0;
+    while(temp!=NULL && temp->data!=target){
+        count++;
+        temp=temp->next;
+    }
+    return count;
+}
+
+void PrintIthNode(Node *head,int pos){
+    if(head==NULL){
+        return;
+    }
+    if(length(head)>pos){
+        return;
+    }
+    Node *temp=head;
+    int i=pos;
+    while(temp!=NULL){
+        if(pos==0){
+            cout<<temp->data<<endl;
+        }
+        i--;
+        temp=temp->next;
+    }
+}
+
+/* Recursive Functions*/
+
+Node *takeInput_Recursively(Node *head,int data,int pos){
     if(head==NULL){
         if(pos==0){
             Node *newNode=new Node(data);
-            newNode->next=head;
             head=newNode;
-            return newNode;
+            return head;
         }
         return head;
     }
-    
     Node *newNode=new Node(data);
-    
     if(pos==0){
         newNode->next=head;
         head=newNode;
         return newNode;
     }
-    head->next=takeInput_recursively(head->next,data,pos-1);
+    head->next=takeInput_Recursively(head->next,data,pos-1);
     return head;
-    
-}
-
-void print(Node *head){
-    Node *temp=head;
-    while(temp!=NULL){
-        cout<<temp->data<<" ";
-        temp=temp->next;
-    }
-    cout<<endl;
 }
 
 void print_recursively(Node *head){
-    Node *temp=head;
-    if(temp==NULL){
+    if(head==NULL){
         return;
     }
-    cout<<temp->data<<" ";
-    print_recursively(temp->next);
+    cout<<head->data<<" ";
+    print_recursively(head->next);
 }
 
-Node *deleteatithpos(Node *head,int pos){
-    if(head==NULL){
-        return 0;
-    }
-    if(pos==0){
-        Node *tmp=head;
-        head=head->next;
-        free(tmp);
-        return head;
-    }
-    int i=0;
-    Node *tmp=head;
-    while(tmp!=NULL && i<pos-1){
-        i++;
-        tmp=tmp->next;
-    }
-    tmp->next=tmp->next->next;
-    return head;
-}
-
-int length(Node *head){
-    if(head==NULL){
-        return 0;
-    }
-    return length(head->next)+1;
-}
-
-int length_iteratively(Node *head){
-    if(head==NULL){
-        return 0;
-    }
-    Node *tmp=head;
-    int c=0;
-    while(tmp!=NULL){
-        c=c+1;
-        tmp=tmp->next;
-    }
-    return c;
-}
-
-void printithNode(Node *head,int pos){
-    if(head==NULL){
-        return ;
-    }
-    Node *tmp=head;int i=0;
-    while(tmp!=NULL && i<pos){
-        tmp=tmp->next;i++;
-    }
-    cout<<tmp->data<<endl;
-    
-}
-
-Node *deleteatithpos_recursively(Node *head,int pos){
+Node* del_ithNodeRecursively(Node *head,int pos){
     if(head==NULL){
         return NULL;
     }
     if(pos==0){
-        Node *tmp=head;
-        head=tmp->next;
-        free(tmp);
+        Node *temp_del=head;
+        head=temp_del->next;
+        free(temp_del);
         return head;
     }
-    Node *x=deleteatithpos_recursively(head->next,pos-1);
+    Node *x=del_ithNodeRecursively(head->next,pos-1);
     head->next=x;
     return head;
 }
 
-int search(Node *head,int d){
-    Node *temp=head;int i=0;
+int lengthRecursively(Node *head){
     if(head==NULL){
-        return -1;
-    }
-    while(temp!=NULL && temp->data!=d){
-        i++;temp=temp->next;
-    }
-    return i;
-}
-
-int search_recursively(Node *head,int d){
-    if(head==NULL){
-        return -1;
-    }
-    if(head->data==d){
         return 0;
     }
-    int count=search_recursively(head->next,d);
-    if(count==-1){
+    return lengthRecursively(head->next)+1;
+}
+
+int SearchRecursively(Node *head,int data){
+    if(head==NULL){
         return -1;
     }
-    return count+1;
+    
+    if(head->data==data){
+        return 0;
+    }
+    
+    return SearchRecursively(head->next,data)+1;
 }
 int main(){
-    Node *head=takeInput();
-    print(head);
-    int d,p;
-    cin>>d>>p;
-    Node *h1=takeInput_recursively(head,d,p);
-    print_recursively(h1);
-    cout<<endl;
-    int pos;
-    cin>>pos;
-    h1=deleteatithpos(h1,pos);
-    print_recursively(h1);
-    cout<<endl;
-    cout<<length_iteratively(h1)<<endl;
-    cout<<length(h1)<<endl;
-    printithNode(head,2);
-    head=deleteatithpos_recursively(head,2);
-    print_recursively(head);
-    cout<<search(head,3);
-    cout<<search_recursively(head,3)<<endl;
-    
+    int choice;
+    cin>>choice;
+    Node *root=NULL;
+    while(choice!=-1){
+        if(choice==1){
+          root=takeInput();  // Input at end
+          print(root);
+        }
+       else if(choice==2){
+          root=insertAtBeginning(root);  // Input from beginning
+          print(root);
+       }
+       else if(choice==3){
+           root=takeInput();  // Input at end
+           int pos,d;
+           cin>>pos>>d;
+           root=insertAtithPos(root,pos,d);  // Input from ith Positon
+           print(root);
+       }
+       else if(choice==4){
+           root=takeInput();  // Input at end
+           del_at_Beginning(root); // delete from beginning
+           print(root);
+       }
+       else if(choice==5){
+           root=takeInput();  // Input at end
+           del_at_end(root); // delete from end
+           print(root);
+       }
+       else if(choice==6){
+           root=takeInput();  // Input at end
+           int pos;
+           cin>>pos;
+           delAtithPos(root,pos); // delete from any position
+           print(root);
+       }
+       else if(choice==7){
+           root=takeInput();  // Input at end
+           cout<<length(root)<<endl;
+       }
+       else if(choice==8){
+           root=takeInput();  // Input at end
+           int target;
+           cin>>target;
+           if(search(root,target)==-1){
+               cout<<"Not found"<<endl;
+           }
+           else{
+               cout<<"Found at index"<<" "<<search(root,target)<<endl;
+           }
+       }
+       else if(choice==9){
+           root=takeInput();  // Input at end
+           int pos;
+           cin>>pos;
+           PrintIthNode(root,pos);
+       }
+       else if(choice==10){
+           int data;int pos;
+           root=takeInput();
+           cin>>data>>pos;
+           root=takeInput_Recursively(root,data,pos); // Input at ith pos Recursively 
+           print_recursively(root);
+       }
+       else if(choice==11){
+           Node *root=takeInput();
+           print_recursively(root);
+           int pos;
+           cin>>pos;
+           del_ithNodeRecursively(root,pos);
+           print_recursively(root);
+       }
+       else if(choice==12){
+           Node *root=takeInput();
+           cout<<lengthRecursively(root)<<endl;
+       }
+       else if(choice==13){
+           Node *root=takeInput();
+           int data;
+           cin>>data;
+           if(SearchRecursively(root,data)==-1){
+               cout<<"Does not exists"<<endl;
+           }
+           else{
+               cout<<"Element at "<<SearchRecursively(root,data)<<endl;
+           }
+         
+       }
+    }
 }
