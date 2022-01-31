@@ -1,7 +1,7 @@
 //https://practice.geeksforgeeks.org/problems/remove-loop-in-linked-list/1#
 
-//Approach 1 using slow & fast pointers
- void removeLoop(Node* head)
+//Approach 1 using slow & fast pointers TC O(N)
+ void removeLoop(Node* head) 
     {
         Node *slow=head;Node *fast=head;
         
@@ -28,14 +28,14 @@
             fast->next=NULL;
         }
     }
-//Approach 2 using Hashmaps
+//Approach 2 using Hashmaps TC:O(N),SC:O(N)
 void removeLoop(Node* head)
     {
-        unordered_map<Node*,int> mp;
+        unordered_map<Node*,int> mp;  //to store node addr as key and freq as value
         Node *temp=head;
         while(temp!=NULL){
             mp[temp]++;
-            if(mp[temp->next]==1){
+            if(mp[temp->next]==1){  // value is already 1 then put NULL & break the cycle
                 temp->next=NULL;
                 break;
             }
