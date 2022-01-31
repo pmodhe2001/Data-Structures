@@ -1,14 +1,15 @@
 //https://practice.geeksforgeeks.org/problems/circular-linked-list/1#
 bool isCircular(Node *head)
 {
-   if(!head)return head;
-   
-   Node *temp=head->next;
-   while(temp!=NULL){
-       if(temp==head){
+   if(head==NULL){
+       return head;
+   }
+   Node *tmp=head->next;
+   while(tmp!=NULL){
+       if(tmp==head){
            return true;
        }
-       temp=temp->next;
+       tmp=tmp->next;
    }
    return false;
 }
