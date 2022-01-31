@@ -54,13 +54,13 @@ Node *takeInput_Begg(Node *tail){
 void print(Node *&tail){
     
     Node *tmp=tail->next;
-    
+    cout<<tail->data<<" "; 
     while(tmp!=tail){
         cout<<tmp->data<<" ";
         tmp=tmp->next;
         
     }
-    cout<<tail->data<<" ";
+  //  cout<<tail->data<<" ";  /// it should be in above while loop
     cout<<endl;
 }
 
@@ -74,14 +74,15 @@ Node *delFrombegg(Node *&tail){
     return tail;
 }
 
-Node *delFromEnd(Node *&head){
+Node *delFromEnd(Node *head){   /// dont take head as call by refernce
     if(head==NULL)return NULL;
     Node *tmp=head;
     while(tmp->next->next!=head){
         tmp=tmp->next;
     }
     Node* temp_del = tmp->next;
-    tmp->next = head;
+   /// tmp->next = head;
+    tmp->next = tmp->next->next; 
     free(temp_del); 
     
     
