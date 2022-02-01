@@ -1,6 +1,6 @@
 #https://practice.geeksforgeeks.org/problems/delete-nodes-having-greater-value-on-right/1#
 Node *helper(Node *root){
-        if(!root || !root->next){
+        if(!root->next){
             return root;
         }
         Node *temp=helper(root->next);
