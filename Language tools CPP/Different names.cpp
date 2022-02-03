@@ -44,7 +44,9 @@ int main() {
        	temp=temp+input[i];
        }
     }
+	
     int count=0;
+	
     for(auto i:mp){
     	if(i.second!=1){
     		cout<<i.first<<" "<<i.second<<endl;
@@ -53,7 +55,9 @@ int main() {
     		count++;
     	}
     }
+	
      if(count==mp.size()){
     	cout<<-1<<endl;
     }
+	
 }
