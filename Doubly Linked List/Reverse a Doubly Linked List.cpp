@@ -4,10 +4,12 @@ Node* reverseDLL(Node *head)
    if(head==NULL){
         return head;
     }
+   
     if(head->next==NULL){
         head->prev=NULL;
         return head;
     }
+   
     Node *smallAns=reverseDLL(head->next);
     head->next->next=head;
     head->prev=head->next;
