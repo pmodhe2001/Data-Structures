@@ -4,6 +4,7 @@
 using namespace std;
 
 template<typename T>
+//Class for binary tree node
 class BinaryTreeNode{
     public:
        T data;
