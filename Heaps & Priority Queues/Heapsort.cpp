@@ -1,64 +1,66 @@
-
 #include <iostream>
+#include <vector>
+#include <cmath>
+
 using namespace std;
 
-void HeapSort(int arr[],int n){
-    // For building the Heap in input array itself
-    for(int i=1;i<n;i++){
-        int chInd=i;
-        while(chInd>0){
-            int pInd=(chInd-1)/2;
-            if(arr[chInd]<arr[pInd]){
-                swap(arr[chInd],arr[pInd]);
-            }
-            else{
-                break;
-            }
-            chInd=pInd;
-        }
+void maxHeapify(vector<int> &v,int i,int n){
+    int l=2*i+1;
+    int r=l+1;
+    int largest=i;
+    
+    
+    if(l<n && v[l]>v[i]){
+        largest=l;
+    }
+    else{
+        largest=i;
+    }
+    if(r<n && v[r]>v[largest]){
+        largest=r;
     }
     
-    
-    // For removing Elements
-    int size=n;
-    while(size>1){
-        swap(arr[0],arr[size-1]);
-        size--;
-        
-        int p=0,l=2*p+1,r=2*p+2;
-        while(l<size){
-            int minIndex=p;
-            if(arr[minIndex]>arr[l]){
-                minIndex=l;
-            }
-            if(r<size && arr[minIndex]>arr[r]){
-                minIndex=r;
-            }
-            swap(arr[minIndex],arr[p]);
-            p=minIndex;
-            l=2*p+1;
-            r=2*p+2;
-        }
-        
+    if(largest!=i){
+        swap(v[i],v[largest]);
+        maxHeapify(v,largest,n);
     }
-    
 }
 
+void BuildMaxHeap(vector<int> &v){
+    int n=v.size();
+    
+    for(int i=(n/2);i>=0;i--){
+        maxHeapify(v,i,n);
+    }
+}
+
+void HeapSort(vector<int> &v){
+    BuildMaxHeap(v);
+    int n=v.size();
+    for(int i=n-1;i>0;i--){
+        swap(v[0],v[i]);
+        n--;
+        maxHeapify(v,0,n);
+    }
+}
 
 int main()
 {
     int n;
     cin>>n;
-    int *arr=new int[n];
+    
+    vector<int> v;
     for(int i=0;i<n;i++){
-        cin>>arr[i];
+        int d;
+        cin>>d;
+        v.push_back(d);
     }
     
-    HeapSort(arr,n);
+    HeapSort(v);
     
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<" ";
+    
+    for(auto i:v){
+        cout<<i<<" ";
     }
     
-    delete []arr;
 }
