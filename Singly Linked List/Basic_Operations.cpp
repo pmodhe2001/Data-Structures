@@ -45,7 +45,7 @@ Node* insertAtBeginning(Node *&head){
     int data;
     cin>>data;
     while(data!=-1){
-        if(head==NULL){
+        if(head==NULL){                                         //Edge case 1: if head == NULL
             Node *newNode=new Node(data);
             head=newNode;
         }
@@ -60,13 +60,13 @@ Node* insertAtBeginning(Node *&head){
 }
 
 Node *insertAtithPos(Node *&head,int pos,int data){
-    if(head==NULL && pos==0){
-        Node *newNode=new Node(data);
+    if(head==NULL && pos==0){                                       // Edge Case 1: if head is NULL and pos is equals to Zero
+        Node *newNode=new Node(data);                                                           // then create newNode and return it
         head=newNode;
         return head;
     }
-    if(head==NULL && pos!=0){
-        cout<<"Given Singly Linked List is Empty & position is non zero"<<endl;
+    if(head==NULL && pos!=0){                                       // Edge Case 2: if head is NULL and pos is non-zero
+        cout<<"Given Singly Linked List is Empty & position is non zero"<<endl;                 // return NULL
         return NULL;
     }
     if(head!=NULL){
@@ -82,14 +82,14 @@ Node *insertAtithPos(Node *&head,int pos,int data){
 }
 
 void del_at_Beginning(Node *&head){
-    if(head==NULL)return;
+    if(head==NULL)return;      // Edge case 1 : If head is at NULL
     Node *tmp_del=head;
     head=head->next;
     free(tmp_del);
 }
 
 void del_at_end(Node *&head){
-    if(head==NULL)return;
+    if(head==NULL)return;           // Edge case 1 : If head is at NULL
     Node *tmp=head;
     while(tmp->next->next!=NULL){
         tmp=tmp->next;
@@ -100,10 +100,10 @@ void del_at_end(Node *&head){
 }
 
 void delAtithPos(Node *&head,int pos){
-    if(head==NULL){
-        return;
+    if(head==NULL){                  // Case 1 : If head is at NULL return
+        return;                          
     }
-    if(head!=NULL && pos==0){
+    if(head!=NULL && pos==0){       // Case 2 : If head is not at NULL and pos is equal to zero
         Node *tmp_del=head;
         head=head->next;
         free(tmp_del);
