@@ -71,7 +71,7 @@ void print_tofront(Node *tail){
 
 Node *InsertAtBeginning(Node *head,int data){
     Node*tail=NULL;
-    if(head==NULL ){
+    if(head==NULL ){                            // Edge Case 1 : Check if head is equal to NULL
         Node *newNode=new Node(data);
         head=newNode;
         tail=newNode;
@@ -86,13 +86,13 @@ Node *InsertAtBeginning(Node *head,int data){
 
 Node *InsertAtithPos(Node *head,int data,int pos){
     Node *tail=NULL;
-    if(head==NULL && pos==0){
+    if(head==NULL && pos==0){                       // Edge Case 1 : Check if head is NULL and pos is equal to 0
         Node *newNode=new Node(data);
         head=newNode;
         tail=newNode;
         return head;
     }
-    if(head!=NULL && pos==0){
+    if(head!=NULL && pos==0){                      // Edge Case 2 : Check if head is not equal to NULL and pos is equal to 0
         Node *newNode=new Node(data);
         newNode->next=head;
         head->prev=newNode;
@@ -114,11 +114,11 @@ Node *InsertAtithPos(Node *head,int data,int pos){
 }
 
 Node *Deletion_fromBeginning(Node *head,Node *tail){
-    if(head==NULL){
+    if(head==NULL){             // Edge Case 1 : If head is at NULL
         return head;
-    }
-    if(head==tail){
-        head=NULL;
+    } 
+    if(head==tail){             // Edge Case 2 : If head and tail both are equal
+        head=NULL;                                // means only one node in our list
         tail=NULL;
         return head;
     }
@@ -148,11 +148,11 @@ Node *Deletion_fromEnd(Node *head,Node *&tail){
 }
 
 Node *Deletion_fromithPos(Node *head,Node *tail,int pos){
-    if(head==NULL){
+    if(head==NULL){                                         // Edge Case 1 : If head is NULL
         return NULL;
     }
-    if(head!=NULL && pos==0){
-        if(head==tail){
+    if(head!=NULL && pos==0){                              // Edge Case 2 : If head is not NULL and pos==0
+        if(head==tail){                                                    // means insert at beginning
            head=NULL;
            tail=NULL;
            return head;
